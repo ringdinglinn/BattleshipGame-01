@@ -12,7 +12,7 @@ public class Grid {
         }
     }
 
-    protected char displayPositionState(int x, int y){
-        return ' ';
+    private char displayPositionState(int x, int y) {
+        throw new UnsupportedOperationException("not implemented yet");
     }
 }
