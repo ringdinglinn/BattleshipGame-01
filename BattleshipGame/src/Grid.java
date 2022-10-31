@@ -1,10 +1,13 @@
 public class Grid {
+    private final int aHeight = 10;
+    private final int aWidth = 10;
+
     public void printBaseGrid() {
 
         // print basic grid layout (later replace by looping through positions?)
-        for (int y = 0; y < 10; y++){
+        for (int y = 0; y < aHeight; y++) {
             System.out.print(y + "|");
-            for (int x = 0; x < 10; x++){
+            for (int x = 0; x < aWidth; x++) {
                 char c = displayPositionState(x, y); // get the char to portray field -> overridden by subclasses
                 System.out.print(c + "|");
             }
