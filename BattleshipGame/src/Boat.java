@@ -1,9 +1,13 @@
 public class Boat {
-    private final int length;
-    private final char letter;
+    private final int aLength;
+    private final char aLetter;
 
-    public Boat (int length, char letter) {
-        this.length = length;
-        this.letter = letter;
+    public Boat(int pLength, char pLetter) {
+        this.aLength = pLength;
+        this.aLetter = pLetter;
     }
+
+    // public Boat get(int pLength, char pLetter) {
+    // return new Boat(pLength, pLetter);
+    // }
 }
