@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Game {
     private List<Player> players = new ArrayList<Player>();
+    private Turn aTurn = new Turn();
 
     public Game() {
 
@@ -16,7 +17,19 @@ public class Game {
         }
     }
 
-    public void runGame() {
+    private class Turn {
+        private int aTurns;
 
+        public Turn() {
+            aTurns = 0;
+        }
+
+        public void incrementTurn() {
+            aTurns = +1;
+        }
+
+        public int getTurn() {
+            return aTurns;
+        }
     }
 }
