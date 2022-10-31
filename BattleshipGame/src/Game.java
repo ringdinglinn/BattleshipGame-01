@@ -6,13 +6,13 @@ public class Game {
 
     public Game() {
 
-        Player humanPlayer = new HumanPlayer();
-        Player computerPlayer = new ComputerPlayer();
+        HumanPlayer humanPlayer = new HumanPlayer();
+        ComputerPlayer computerPlayer = new ComputerPlayer();
 
         players.add(computerPlayer);
         players.add(humanPlayer);
 
-        for ( Player player : players ){
+        for (Player player : players) {
             player.printGrid();
         }
     }
