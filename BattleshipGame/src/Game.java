@@ -32,4 +32,18 @@ public class Game {
             return aTurns;
         }
     }
+
+    public void play() {
+        // TODO: initialize player boards
+
+        // turn = aTurn.getTurn() % players.size();
+        // play game
+        // while (true) {
+        // for (Player player : players) {
+        // code
+        // }
+        // }
+        throw new UnsupportedOperationException("not implemented yet");
+    }
+
 }
