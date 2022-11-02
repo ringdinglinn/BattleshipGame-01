@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Boats implements Iterable<Boat> {
-    private final Boat[] boats = {
+    private final Boat[] aBoats = {
             new Boat(6, 'C'),
             new Boat(4, 'B'),
             new Boat(4, 'B'),
@@ -14,7 +14,7 @@ public class Boats implements Iterable<Boat> {
             new Boat(2, 'P')
     };
 
-    private final int aSize = boats.length;
+    private final int aSize = aBoats.length;
 
     /** Returns size of boats array */
     public int getSize() {
@@ -23,14 +23,11 @@ public class Boats implements Iterable<Boat> {
 
     /** Returns a copy of the boats array as an Iterable<T> */
     public Iterable<Boat> getBoats() {
-        return new ArrayList<Boat>(Arrays.asList(boats));
+        return new ArrayList<Boat>(Arrays.asList(aBoats));
     }
 
-    // ! Im not sure if this class should have the allSunk() method. I think this
-    // ! belongs to player
-
     public Iterator<Boat> iterator() {
-        return Arrays.stream(boats).iterator();
+        return Arrays.stream(aBoats).iterator();
     }
 
 }
