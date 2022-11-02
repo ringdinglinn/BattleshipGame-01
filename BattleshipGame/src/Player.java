@@ -15,8 +15,8 @@ public abstract class Player {
     }
 
     /** Returns all shots made by a player */
-    public Iterator<Position> getShots() {
-        throw new UnsupportedOperationException("not implemented yet");
+    public Iterable<Shot> getShots() {
+        return aShots.getShots();
     }
 
     /** Returns all boats of a player */
