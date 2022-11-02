@@ -1,5 +1,4 @@
-import javax.management.loading.ClassLoaderRepository;
-import java.util.*;
+
 import java.util.regex.*;
 
 public class HumanPlayer extends Player {
@@ -17,14 +16,29 @@ public class HumanPlayer extends Player {
         TerminalIO.writeLine("Please place a bomb: ");
         String input = TerminalIO.readLine();
 
+        // Validate coordinate
         if (!validateCoordinateInput(input)) {
             System.out.println("Please try again");
             setBomb();
         }
 
-        // TODO: implement placing boat
+        // convert coordinate string into Position object
+        String[] inpuStrings = input.split("");
+        int x = Position.Letter.getOrdinalOfLetter(inpuStrings[0]);
+        int y = Position.Letter.getOrdinalOfLetter(inpuStrings[1]);
+        Position shotPos = Position.get(x, y);
 
-        System.out.println("Bomb placed!");
+        if (!isNewShot(shotPos)) {
+            System.out.println("You already placed a bomb here..");
+            setBomb();
+        }
+
+        if (isHit(shotPos)) {
+            TerminalIO.writeLine("You hit something!");
+            setBomb();
+        }
+
+        TerminalIO.writeLine("You missed!");
     }
 
     protected void setBoat(Boat boat) {
