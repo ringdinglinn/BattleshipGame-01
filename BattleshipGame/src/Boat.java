@@ -6,10 +6,15 @@ public class Boat implements Iterable<Position>{
     private final char aLetter;
     private Position aStartPos;
     private Position aEndPos;
+    private boolean isPlaced = false;
 
     /** Returns true if the boat is placed */
     public boolean getIsPlaced(){
-        return aStartPos != null && aEndPos != null;
+        return isPlaced;
+    }
+
+    public void place(){
+        isPlaced = true;
     }
 
     public Boat(int pLength, char pLetter) {

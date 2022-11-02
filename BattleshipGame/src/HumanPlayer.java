@@ -77,27 +77,36 @@ public class HumanPlayer extends Player {
 
             // is horizontal or vertical
             if (x1 == x2 || y1 == y2) {
-                isValid = true;
                 System.out.println(x1 + ", " + y1 + ", " + x2 + ", " + y2);
 
                 // is of correct length
-                if ((x1 == x2 && x2 - x1 == boat.getLength()) || (y1 == y2 && y2 - y1 == boat.getLength())) {
-
-                    // doesn't collide with boats
+                if ((x1 == x2 && y2 - y1 + 1 == boat.getLength()) || (y1 == y2 && x2 - x1 + 1 == boat.getLength())) {
+                    System.out.println("correct Length");
                     boat.setPositions(Position.get(x1, y1), Position.get(x2, y2));
-                    boolean collidesWithBoats = false;
-                    for (Position position : boat) {
-                        if (aBoats.positionIsOccupied(position)) collidesWithBoats = true;
-                    }
 
-                    if (!collidesWithBoats){
+                    boolean collidesWithBoats = boatCollidesWithBoats(boat);
+                    System.out.println(collidesWithBoats);
+                    if (!collidesWithBoats) {
                         isValid = true;
-                    } else {
-                        boat.setPositions(null, null);
+                        boat.place();
                     }
                 }
             }
         }
         return isValid;
+    }
+
+    public boolean boatCollidesWithBoats(Boat boat){
+        // doesn't collide with boats
+        boolean collidesWithBoats = false;
+        for (Position position : boat) {
+            if (aBoats.positionIsOccupied(position)) collidesWithBoats = true;
+        }
+
+        if (collidesWithBoats){
+            boat.setPositions(null, null);
+        }
+
+        return collidesWithBoats;
     }
 }
