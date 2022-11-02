@@ -15,13 +15,13 @@ public abstract class Player {
     }
 
     /** Returns all shots made by a player */
-    public Iterator<Position> getShots() {
-        throw new UnsupportedOperationException("not implemented yet");
+    public Iterable<Shot> getShots() {
+        return aShots.getShots();
     }
 
     /** Returns all boats of a player */
-    public Iterator<Position> getBoats() {
-        throw new UnsupportedOperationException("not implemented yet");
+    public Iterable<Boat> getBoats() {
+        return aBoats.getBoats();
     }
 
     public void placeBoats() {
@@ -30,7 +30,7 @@ public abstract class Player {
         }
     }
 
-    protected void placeSingleBoat(Boat boat){
+    protected void placeSingleBoat(Boat boat) {
 
     }
 }
