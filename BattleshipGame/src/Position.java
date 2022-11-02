@@ -1,22 +1,46 @@
+import java.util.*;
+
 public class Position {
-    private final String x;
-    private final String y;
+    private final int aX;
+    private final int aY;
 
     /**
      * 
-     * @param x Only valid input [A-J]
-     * @param y Only valid input [0-9]
+     * @pre x >= 0 && x <= 9
+     * @pre y >= 0 && y <= 9
      */
-    public Position(String x, String y) {
-        this.x = x;
-        this.y = y;
+    public Position(int pX, int pY) {
+        aX = pX;
+        aY = pY;
     }
 
-    public String getX() {
-        return x;
+    public int getX() {
+        return aX;
     }
 
-    public String getY() {
-        return y;
+    public int getY() {
+        return aY;
+    }
+
+    public boolean equals(Position pPos) {
+        return aX == pPos.getX() && aY == pPos.getY();
+    }
+
+    public int hashCode() {
+        return Objects.hash(aX, aY);
+    }
+
+    /** @pre pPos1 != null && pPos2 != null;
+     *  @pre pPos1.getX() < pPos2.getY() || pPos2.getY() < pPos.getY() */
+    public boolean within(Position pPos1, Position pPos2) {
+        assert pPos1 != null && pPos2 != null;
+
+        if (pPos1.getX() == pPos2.getX()){ // vertical
+            return (pPos1.getY() <= aY && pPos2.getY() >= aY) && aX == pPos1.getX();
+        } else if (pPos1.getX() == pPos2.getX()){ // horizontal
+                return (pPos1.getX() <= aX && pPos2.getX() >= aX) && aY == pPos1.getY();
+        } else {
+            return false;
+        }
     }
 }
