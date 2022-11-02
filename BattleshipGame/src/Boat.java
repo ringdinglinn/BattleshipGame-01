@@ -1,7 +1,7 @@
 import java.sql.Array;
 import java.util.*;
 
-public class Boat {
+public class Boat implements Iterable<Position>{
     private final int aLength;
     private final char aLetter;
     private Position aStartPos;
@@ -36,14 +36,20 @@ public class Boat {
         return aLetter;
     }
 
-    public Iterator<Position> getPositions(){
+    public Iterator<Position> iterator(){
         List<Position> positions = new ArrayList<Position>();
 
         if (aStartPos.getX() == aEndPos.getX()) {
-            for (int i = aStartPos.getX(); i <= aEndPos.getX(); i++) {
-
+            for (int x = aStartPos.getX(); x <= aEndPos.getX(); x++) {
+                positions.add(Position.get(x, aStartPos.getY()));
+            }
+        } else {
+            for (int x = aStartPos.getX(); x <= aEndPos.getX(); x++) {
+                positions.add(Position.get(x, aStartPos.getY()));
             }
         }
+
+        return positions.iterator();
     }
 
     // public Boat get(int pLength, char pLetter) {
