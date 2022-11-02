@@ -17,7 +17,7 @@ public class Shots implements Iterable<Shot> {
 
     /**
      * @pre pPosition != null && pShotResult != null
-     * @pre aShots.contain(pPosition) != false
+     * @pre aShots.contain(pPosition) == false
      */
     public void addShot(Position pPosition, ShotResult pShotResult) {
         aShots.add(new Shot(pPosition, pShotResult));
