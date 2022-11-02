@@ -1,3 +1,4 @@
+import javax.management.loading.ClassLoaderRepository;
 import java.util.*;
 import java.util.regex.*;
 
@@ -81,7 +82,19 @@ public class HumanPlayer extends Player {
 
                 // is of correct length
                 if ((x1 == x2 && x2 - x1 == boat.getLength()) || (y1 == y2 && y2 - y1 == boat.getLength())) {
-                    isValid = true;
+
+                    // doesn't collide with boats
+                    boat.setPositions(Position.get(x1, y1), Position.get(x2, y2));
+                    boolean collidesWithBoats = false;
+                    for (Position position : boat) {
+                        if (aBoats.positionIsOccupied(position)) collidesWithBoats = true;
+                    }
+
+                    if (!collidesWithBoats){
+                        isValid = true;
+                    } else {
+                        boat.setPositions(null, null);
+                    }
                 }
             }
         }
