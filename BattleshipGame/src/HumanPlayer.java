@@ -15,4 +15,10 @@ public class HumanPlayer extends Player {
     public boolean isAllSet() {
         throw new UnsupportedOperationException("not implemented yet");
     }
+
+    // TODO: design by contract
+    /**  */
+    public void setBomb() {
+        throw new UnsupportedOperationException("not implemented yet");
+    }
 }

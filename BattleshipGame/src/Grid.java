@@ -16,6 +16,7 @@ public class Grid {
     }
 
     private char displayPositionState(int x, int y) {
-        throw new UnsupportedOperationException("not implemented yet");
+        return ' ';
+        // throw new UnsupportedOperationException("not implemented yet");
     }
 }

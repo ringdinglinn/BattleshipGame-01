@@ -17,10 +17,6 @@ public abstract class Player {
         aShots = new Shots();
     }
 
-    public void setBomb() {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
-
     /** Returns all shots made by a player */
     public Iterator<Position> getShots() {
         throw new UnsupportedOperationException("not implemented yet");
