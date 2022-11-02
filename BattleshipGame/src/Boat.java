@@ -25,6 +25,14 @@ public class Boat {
         return shot.within(aStartPos, aEndPos);
     }
 
+    public int getLength() {
+        return aLength;
+    }
+
+    public char getLetter() {
+        return aLetter;
+    }
+
     // public Boat get(int pLength, char pLetter) {
     // return new Boat(pLength, pLetter);
     // }

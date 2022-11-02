@@ -24,4 +24,13 @@ public abstract class Player {
         throw new UnsupportedOperationException("not implemented yet");
     }
 
+    public void placeBoats() {
+        for (Boat boat : aBoats) {
+            placeSingleBoat(boat);
+        }
+    }
+
+    protected void placeSingleBoat(Boat boat){
+
+    }
 }

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Boats {
+public class Boats implements Iterable<Boat> {
     private final Boat[] boats = {
             new Boat(6, 'C'),
             new Boat(4, 'B'),
@@ -28,5 +28,9 @@ public class Boats {
 
     // ! Im not sure if this class should have the allSunk() method. I think this
     // ! belongs to player
+
+    public Iterator<Boat> iterator() {
+        return Arrays.stream(boats).iterator();
+    }
 
 }

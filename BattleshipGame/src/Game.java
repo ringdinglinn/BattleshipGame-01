@@ -43,7 +43,13 @@ public class Game {
         // code
         // }
         // }
-        throw new UnsupportedOperationException("not implemented yet");
+
+
+        //throw new UnsupportedOperationException("not implemented yet");
+
+        for (Player player : players) {
+            player.placeBoats();
+        }
     }
 
 }

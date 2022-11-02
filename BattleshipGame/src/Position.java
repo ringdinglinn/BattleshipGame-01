@@ -43,4 +43,18 @@ public class Position {
             return false;
         }
     }
+
+    public enum Letter {
+        A, B, C, D, E, F, G, H, I, J;
+
+        public static int getOrdinalOfLetter(String input){
+            int index = -1;
+            for (Position.Letter letter : Position.Letter.values()) {
+                if (letter.toString().equals(String.valueOf(input))) {
+                    index = letter.ordinal();
+                }
+            }
+            return index;
+        }
+    }
 }
