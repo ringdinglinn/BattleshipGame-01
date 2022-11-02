@@ -24,7 +24,7 @@ public class Shots implements Iterable<Shot> {
     }
 
     /** Returns a copy of the boats array as an Iterable<T> */
-    public Iterable<Shot> getBoats() {
+    public Iterable<Shot> getShots() {
         return new ArrayList<Shot>(aShots);
     }
 
