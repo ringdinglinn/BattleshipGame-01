@@ -27,4 +27,14 @@ public class Boats implements Iterable<Boat> {
         return aBoats.iterator();
     }
 
+    public boolean positionIsOccupied(Position pPos) {
+        boolean isOccupied = false;
+
+        for (Boat boat : aBoats) {
+            for (Position position : boat) {
+                if (pPos.equals(position)) isOccupied = true;
+            }
+        }
+        return  isOccupied;
+    }
 }
