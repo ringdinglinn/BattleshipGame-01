@@ -34,4 +34,31 @@ public abstract class Player {
 
     }
 
+    public void setBomb() {
+
+    }
+
+    public boolean isNewShot(Position pShotPos) {
+        // Make sure shot is unique
+        for (Shot shot : aShots) {
+            if (shot.getPosition().equals(pShotPos)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isHit(Position pShotPos) {
+        // Check if shot hit a boat
+        for (Boat boat : aBoats) {
+            if (boat.isHit(pShotPos)) {
+                aShots.addShot(pShotPos, ShotResult.HIT);
+                return true;
+            }
+        }
+        aShots.addShot(pShotPos, ShotResult.MISS);
+        return false;
+
+    }
+
 }
