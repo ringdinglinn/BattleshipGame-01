@@ -6,52 +6,63 @@ public class HumanPlayer extends Player {
         aGrid = new OceanGrid();
     }
 
-    /**
-     * Computer player doesnt require that method as it sets everything during
-     * initalisation
-     */
-    public void setBoat(Boat pBoat) {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
-
     /** Returns whether all boats have been set */
     public boolean isAllSet() {
         throw new UnsupportedOperationException("not implemented yet");
     }
 
-    // TODO: design by contract
-    /**  */
+    /** Asks user to place a bomb */
     public void setBomb() {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
-
-    protected void placeSingleBoat(Boat boat) {
-        TerminalIO.writeLine("Please enter coordinates of start and end of " + boat.getLetter() + ", " + boat.getLength() + " fields");
+        TerminalIO.writeLine("Please place a bomb: ");
         String input = TerminalIO.readLine();
 
-        if (validateBoatInput(input, boat)) {
-            System.out.println("nice!");
-        } else {
+        if (!validateCoordinateInput(input)) {
             System.out.println("Please try again");
-            placeSingleBoat(boat);
+            setBomb();
         }
+        System.out.println("Bomb placed!");
+
+        // TODO: implement placing boat
     }
 
+    protected void setBoat(Boat boat) {
+        TerminalIO.writeLine("Please enter coordinates of start and end of " + boat.getLetter() + ", "
+                + boat.getLength() + " fields");
+        String input = TerminalIO.readLine();
+
+        if (!validateBoatInput(input, boat)) {
+            System.out.println("Please try again");
+            setBoat(boat);
+        }
+
+        System.out.println("Nice! Boat placed");
+    }
+
+    /* Returns whether a coordinate matches the regex pattern [A-J][0-9] */
+    private boolean validateCoordinateInput(String pCoordinate) {
+        String pattern = "[A-J][0-9]";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(pCoordinate);
+        return m.find();
+
+    }
+
+    /* Returns whether the boat placement is valid */
     private boolean validateBoatInput(String input, Boat boat) {
         boolean isValid = false;
-        String pattern = "[A-J][0-9],[A-J][0-9]";
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(input);
+
+        String[] coordinates = input.split(",");
+        if (coordinates.length > 2) {
+            return false;
+        }
 
         // is correct format
-        if (m.find()){
-            String result = m.group(0);
-
+        if (validateCoordinateInput(coordinates[0]) && validateCoordinateInput(coordinates[1])) {
             char[] inputs = {
-                result.charAt(0),
-                result.charAt(1),
-                result.charAt(3),
-                result.charAt(4)
+                    input.charAt(0),
+                    input.charAt(1),
+                    input.charAt(3),
+                    input.charAt(4)
             };
 
             int y1 = inputs[1] - 48;

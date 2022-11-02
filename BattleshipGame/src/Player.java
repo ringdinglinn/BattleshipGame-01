@@ -24,13 +24,14 @@ public abstract class Player {
         return aBoats.getBoats();
     }
 
-    public void placeBoats() {
+    public void setBoats() {
         for (Boat boat : aBoats) {
-            placeSingleBoat(boat);
+            setBoat(boat);
         }
     }
 
-    protected void placeSingleBoat(Boat boat) {
+    protected void setBoat(Boat boat) {
 
     }
+
 }
