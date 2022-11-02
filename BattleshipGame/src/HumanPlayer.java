@@ -20,9 +20,10 @@ public class HumanPlayer extends Player {
             System.out.println("Please try again");
             setBomb();
         }
-        System.out.println("Bomb placed!");
 
         // TODO: implement placing boat
+
+        System.out.println("Bomb placed!");
     }
 
     protected void setBoat(Boat boat) {
@@ -34,6 +35,8 @@ public class HumanPlayer extends Player {
             System.out.println("Please try again");
             setBoat(boat);
         }
+
+        // TODO: place boat
 
         System.out.println("Nice! Boat placed");
     }
