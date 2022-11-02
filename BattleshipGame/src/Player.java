@@ -3,17 +3,14 @@ import java.util.*;
 public abstract class Player {
     protected Grid aGrid;
     /** Boats that still need to be place */
-    protected List<Boat> aPlaceableBoats;
-    /** Placed boats */
-    protected List<Boat> aBoats;
+    protected Boats aBoats;
     /** Shots that have been fired */
     protected Shots aShots;
 
     public void printGrid() {
         aGrid.printBaseGrid();
         // Copy elements from iterable to aPlaceableBoats list
-        new Boats().getBoats().forEach(aPlaceableBoats::add);
-        aBoats = new ArrayList<Boat>(new Boats().getSize());
+        aBoats = new Boats();
         aShots = new Shots();
     }
 
