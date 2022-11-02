@@ -1,3 +1,6 @@
+import java.sql.Array;
+import java.util.*;
+
 public class Boat {
     private final int aLength;
     private final char aLetter;
@@ -31,6 +34,16 @@ public class Boat {
 
     public char getLetter() {
         return aLetter;
+    }
+
+    public Iterator<Position> getPositions(){
+        List<Position> positions = new ArrayList<Position>();
+
+        if (aStartPos.getX() == aEndPos.getX()) {
+            for (int i = aStartPos.getX(); i <= aEndPos.getX(); i++) {
+
+            }
+        }
     }
 
     // public Boat get(int pLength, char pLetter) {

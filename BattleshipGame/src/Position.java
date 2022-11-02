@@ -4,14 +4,29 @@ public class Position {
     private final int aX;
     private final int aY;
 
+    private static int GRIDSIZE = 10;
+    private static Position[][] aPositions = new Position[GRIDSIZE][GRIDSIZE];
+
+    static {
+        for (int x = 0; x < GRIDSIZE; x++){
+            for (int y = 0; y < GRIDSIZE; y++){
+                aPositions[x][y] = new Position(x,y);
+            }
+        }
+    }
+
     /**
      * 
      * @pre x >= 0 && x <= 9
      * @pre y >= 0 && y <= 9
      */
-    public Position(int pX, int pY) {
+    private Position(int pX, int pY) {
         aX = pX;
         aY = pY;
+    }
+
+    public static Position get(int pX, int pY){
+        return aPositions[pX][pY];
     }
 
     public int getX() {

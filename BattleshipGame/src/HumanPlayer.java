@@ -29,23 +29,21 @@ public class HumanPlayer extends Player {
         TerminalIO.writeLine("Please enter coordinates of start and end of " + boat.getLetter() + ", " + boat.getLength() + " fields");
         String input = TerminalIO.readLine();
 
-        if (validateBoatInput(input)) {
+        if (validateBoatInput(input, boat)) {
             System.out.println("nice!");
         } else {
             System.out.println("Please try again");
             placeSingleBoat(boat);
         }
-
-        // validation
-        // boat -> set start & end position
     }
 
-    private boolean validateBoatInput(String input) {
+    private boolean validateBoatInput(String input, Boat boat) {
         boolean isValid = false;
         String pattern = "[A-J][0-9],[A-J][0-9]";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(input);
 
+        // is correct format
         if (m.find()){
             String result = m.group(0);
 
@@ -62,9 +60,15 @@ public class HumanPlayer extends Player {
             int x1 = Position.Letter.getOrdinalOfLetter(String.valueOf(inputs[0]));
             int x2 = Position.Letter.getOrdinalOfLetter(String.valueOf(inputs[2]));
 
-            if (x1 == x2 || y1 == y2){
+            // is horizontal or vertical
+            if (x1 == x2 || y1 == y2) {
                 isValid = true;
                 System.out.println(x1 + ", " + y1 + ", " + x2 + ", " + y2);
+
+                // is of correct length
+                if ((x1 == x2 && x2 - x1 == boat.getLength()) || (y1 == y2 && y2 - y1 == boat.getLength())) {
+                    isValid = true;
+                }
             }
         }
         return isValid;
