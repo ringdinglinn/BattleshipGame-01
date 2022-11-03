@@ -35,15 +35,15 @@ public class HumanPlayer extends Player {
             setBomb();
         }
 
-        updateGrid();
-
         if (isHit(shotPos)) {
             TerminalIO.writeLine("You hit something!");
             aShots.addShot(shotPos, ShotResult.HIT);
+            updateGrid();
             setBomb();
         }
+        
         aShots.addShot(shotPos, ShotResult.MISS);
-
+        updateGrid();
 
         TerminalIO.writeLine("You missed!");
     }

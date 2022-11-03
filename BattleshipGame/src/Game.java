@@ -44,7 +44,6 @@ public class Game {
         while (true) {
             int turn = aTurn.getTurn() % players.size();
             players.get(turn).setBomb();
-            updateGrids();
             aTurn.incrementTurn();
         }
     }
