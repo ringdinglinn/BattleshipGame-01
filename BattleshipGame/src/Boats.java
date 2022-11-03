@@ -67,10 +67,11 @@ public class Boats implements Iterable<Boat> {
     }
 
     public boolean allBoatsDestroyed() {
-        boolean allDestroyed = true;
         for (Boat boat : aBoats) {
-            if (!boat.getIsSunk()) allDestroyed = false;
+            if (!boat.getIsSunk()) {
+                return false;
+            }
         }
-        return allDestroyed;
+        return true;
     }
 }

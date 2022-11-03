@@ -51,8 +51,9 @@ public class Game {
 
     private void evaluateGameState(){
         for (Player player : players) {
-            player.allBoatsDestroyed();
-            player.getOpponent().hasWon();
+            if (player.allBoatsDestroyed()) {
+                player.getOpponent().hasWon();
+            }
         }
     }
 

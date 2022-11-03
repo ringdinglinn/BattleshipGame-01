@@ -17,10 +17,7 @@ public class HumanPlayer extends Player {
 
     /** Asks user to place a bomb */
     public void setBomb() {
-        System.out.println("set bomb start");
         while (true) {
-
-            System.out.println("in while loop");
             TerminalIO.writeLine("Please place a bomb: ");
             String input = TerminalIO.readLine();
 

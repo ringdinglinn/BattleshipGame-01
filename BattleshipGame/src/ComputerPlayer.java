@@ -15,9 +15,7 @@ public class ComputerPlayer extends Player {
 
     /** Returns when there is a miss */
     public void setBomb() {
-        System.out.println("set bomb (computer player)");
         while(true){
-            System.out.println("in while loop (computer player)");
             int x = new Random().nextInt(10);
             int y = new Random().nextInt(10);
 
@@ -26,7 +24,7 @@ public class ComputerPlayer extends Player {
             if (isNewShot(shotPos)) {
                 ShotResult result = getShotResult(shotPos);
                 if (result != ShotResult.MISS) {
-                    TerminalIO.writeLine("You hit something!");
+                    TerminalIO.writeLine("Opponent hit something!");
                     aShots.addShot(shotPos, result);
                     if (result == ShotResult.SUNK) {
                         updateShots();
@@ -35,7 +33,7 @@ public class ComputerPlayer extends Player {
                 } else {
                     aShots.addShot(shotPos, ShotResult.MISS);
                     updateGrid();
-                    TerminalIO.writeLine("You missed!");
+                    TerminalIO.writeLine("Opponent missed!");
                     break;
                 }
             }
