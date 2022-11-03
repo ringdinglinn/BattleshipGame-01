@@ -1,7 +1,6 @@
-import java.sql.Array;
 import java.util.*;
 
-public class Boat implements Iterable<Position>{
+public class Boat implements Iterable<Position> {
     private final int aLength;
     private final char aLetter;
     private Position aStartPos;
@@ -18,13 +17,13 @@ public class Boat implements Iterable<Position>{
     }
 
     /** @pre pStartPos != null && pEndPos != null */
-    public void setPositions(Position pStartPos, Position pEndPos){
+    public void setPositions(Position pStartPos, Position pEndPos) {
         assert pStartPos != null && pEndPos != null;
         this.aStartPos = pStartPos;
         this.aEndPos = pEndPos;
     }
 
-    public boolean isHit(Position shot){
+    public boolean isHit(Position shot) {
         return shot.within(aStartPos, aEndPos);
     }
 
