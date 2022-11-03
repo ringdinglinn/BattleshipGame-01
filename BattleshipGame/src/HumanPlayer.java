@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 public class HumanPlayer extends Player {
     public HumanPlayer() {
-        aGrid = new OceanGrid();
+        aGrid = new OceanGrid(this); // circular reference!
     }
 
     /** Returns whether all boats have been set */
@@ -56,6 +56,7 @@ public class HumanPlayer extends Player {
             setBoat(boat);
         } else {
             boat.setPositions(startPos, endPos);
+            printGrid();
             System.out.println("Nice! Boat placed");
         }
     }

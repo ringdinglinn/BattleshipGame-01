@@ -109,5 +109,15 @@ public class Position {
             }
             return index;
         }
+
+        public static String getNameByOrdinal(int i){
+            String name = "";
+            for (Position.Letter letter : Position.Letter.values()) {
+                if (letter.ordinal() == i) {
+                    name = letter.name();
+                }
+            }
+            return name;
+        }
     }
 }

@@ -3,15 +3,12 @@ import java.util.*;
 public abstract class Player {
     protected Grid aGrid;
     /** Boats that still need to be place */
-    protected Boats aBoats;
+    protected Boats aBoats = new Boats();
     /** Shots that have been fired */
-    protected Shots aShots;
+    protected Shots aShots = new Shots();
 
     public void printGrid() {
         aGrid.printBaseGrid();
-        // Copy elements from iterable to aPlaceableBoats list
-        aBoats = new Boats();
-        aShots = new Shots();
     }
 
     /** Returns all shots made by a player */
@@ -71,6 +68,14 @@ public abstract class Player {
         }
 
         return collidesWithBoats;
+    }
+
+    public boolean positionIsOccupied(Position pPos){
+        return aBoats.positionIsOccupied(pPos);
+    }
+
+    public char getBoatTypeByPosition(Position pPos) {
+        return aBoats.getBoatTypeByPosition(pPos);
     }
 
 }
