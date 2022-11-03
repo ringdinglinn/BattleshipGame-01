@@ -25,9 +25,9 @@ public class HumanPlayer extends Player {
         }
 
         // convert coordinate string into Position object
-        String[] inpuStrings = input.split("");
-        int x = Position.Letter.getOrdinalOfLetter(inpuStrings[0]);
-        int y = Position.Letter.getOrdinalOfLetter(inpuStrings[1]);
+        String[] inputStrings = input.split("");
+        int x = Position.Letter.getOrdinalOfLetter(inputStrings[0]);
+        int y = Integer.parseInt(inputStrings[1]);
         Position shotPos = Position.get(x, y);
 
         if (!isNewShot(shotPos)) {
@@ -35,15 +35,22 @@ public class HumanPlayer extends Player {
             setBomb();
         }
 
+        updateGrid();
+
         if (isHit(shotPos)) {
             TerminalIO.writeLine("You hit something!");
-            aShots.addShot(shotPos, ShotResult.MISS);
+            aShots.addShot(shotPos, ShotResult.HIT);
             setBomb();
         }
-        aShots.addShot(shotPos, ShotResult.HIT);
+        aShots.addShot(shotPos, ShotResult.MISS);
 
 
         TerminalIO.writeLine("You missed!");
+    }
+
+    protected void updateGrid(){
+        aOpponent.printGrid();
+        printGrid();
     }
 
     protected void setBoat(Boat boat) {
@@ -59,7 +66,6 @@ public class HumanPlayer extends Player {
             setBoat(boat);
         } else {
             boat.setPositions(startPos, endPos);
-            printGrid();
             System.out.println("Nice! Boat placed");
         }
     }

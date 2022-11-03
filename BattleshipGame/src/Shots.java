@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Shots implements Iterable<Shot> {
-    private List<Shot> aShots;
+    private List<Shot> aShots = new ArrayList<>();
 
     /**
      * @pre pPosition != null
@@ -32,6 +32,13 @@ public class Shots implements Iterable<Shot> {
 
     public Iterator<Shot> iterator() {
         return aShots.iterator();
+    }
+
+    public Shot getShotAtPosition(Position pPos){
+        for (Shot shot: aShots){
+            if (shot.getPosition().equals(pPos)) return shot;
+        }
+        return null;
     }
 
 }

@@ -12,9 +12,8 @@ public class Game {
         players.add(computerPlayer);
         players.add(humanPlayer);
 
-        for (Player player : players) {
-            player.printGrid();
-        }
+        humanPlayer.setOpponent(computerPlayer);
+        computerPlayer.setOpponent(humanPlayer);
     }
 
     private class Turn {
@@ -34,17 +33,25 @@ public class Game {
     }
 
     public void play() {
+        updateGrids();
         // Allow everyone to place boats
         for (Player player : players) {
             player.setBoats();
         }
+        updateGrids();
 
         // play the game :)
         while (true) {
             int turn = aTurn.getTurn() % players.size();
             players.get(turn).setBomb();
+            updateGrids();
             aTurn.incrementTurn();
         }
     }
 
+    private void updateGrids(){
+        for (Player player : players) {
+            player.printGrid();
+        }
+    }
 }

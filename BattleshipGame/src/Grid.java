@@ -21,11 +21,21 @@ public abstract class Grid {
                 System.out.print(y + "|");
                 for (int x = 0; x < aWidth; x++) {
                     Position currentPosition = Position.get(x,y);
-                    if (aPlayer.positionIsOccupied(currentPosition)) {
-                        System.out.print(aPlayer.getBoatTypeByPosition(currentPosition));
+                    if (aPlayer.getOpponent().isNewShot(currentPosition)){ // is shot on field
+                        if (aPlayer.positionIsOccupied(currentPosition)) { // is a boat on field
+                            System.out.print(aPlayer.getBoatTypeByPosition(currentPosition));
+                        } else {
+                            System.out.print(" ");
+                        }
                     } else {
-                        System.out.print(" ");
+                        Shot shot = aPlayer.getOpponent().aShots.getShotAtPosition(currentPosition);
+                        if (shot.getShotResult() == ShotResult.HIT){ // get shot
+                            System.out.print("X");
+                        } else if (shot.getShotResult() == ShotResult.MISS){
+                            System.out.print("o");
+                        }
                     }
+
                     System.out.print("|");
                 }
                 System.out.print(y);

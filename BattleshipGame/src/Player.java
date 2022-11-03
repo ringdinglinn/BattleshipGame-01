@@ -6,9 +6,18 @@ public abstract class Player {
     protected Boats aBoats = new Boats();
     /** Shots that have been fired */
     protected Shots aShots = new Shots();
+    protected Player aOpponent;
 
     public void printGrid() {
         aGrid.printBaseGrid();
+    }
+
+    public void setOpponent(Player pOpponent) {
+        aOpponent = pOpponent;
+    }
+
+    public Player getOpponent() {
+        return aOpponent;
     }
 
     /** Returns all shots made by a player */
@@ -47,13 +56,11 @@ public abstract class Player {
 
     public boolean isHit(Position pShotPos) {
         // Check if shot hit a boat
-        for (Boat boat : aBoats) {
+        for (Boat boat : aOpponent.aBoats) {
             if (boat.isHit(pShotPos)) {
-                aShots.addShot(pShotPos, ShotResult.HIT);
                 return true;
             }
         }
-        aShots.addShot(pShotPos, ShotResult.MISS);
         return false;
 
     }
@@ -83,4 +90,8 @@ public abstract class Player {
         return aBoats.getBoatTypeByPosition(pPos);
     }
 
+    protected void updateGrid(){
+        printGrid();
+        aOpponent.printGrid();
+    }
 }

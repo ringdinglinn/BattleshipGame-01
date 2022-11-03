@@ -18,6 +18,8 @@ public class ComputerPlayer extends Player {
             setBomb();
         }
 
+        updateGrid();
+
         if (!isHit(shotPos)) {
             // It was a miss
             aShots.addShot(shotPos, ShotResult.MISS);
