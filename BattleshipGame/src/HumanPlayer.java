@@ -110,14 +110,15 @@ public class HumanPlayer extends Player {
         return isValid;
     }
 
-    public boolean boatCollidesWithBoats(Boat boat){
+    public boolean boatCollidesWithBoats(Boat boat) {
         // doesn't collide with boats
         boolean collidesWithBoats = false;
         for (Position position : boat) {
-            if (aBoats.positionIsOccupied(position)) collidesWithBoats = true;
+            if (aBoats.positionIsOccupied(position))
+                collidesWithBoats = true;
         }
 
-        if (collidesWithBoats){
+        if (collidesWithBoats) {
             boat.setPositions(null, null);
         }
 
