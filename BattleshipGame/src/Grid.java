@@ -1,22 +1,58 @@
-public class Grid {
+import javax.sql.ConnectionPoolDataSource;
+
+public abstract class Grid {
     private final int aHeight = 10;
     private final int aWidth = 10;
+    private final Player aPlayer;
+
+    public Grid(Player pPlayer){
+        aPlayer = pPlayer;
+    }
 
     public void printBaseGrid() {
+        drawName();
 
         // print basic grid layout (later replace by looping through positions?)
-        for (int y = 0; y < aHeight; y++) {
-            System.out.print(y + "|");
-            for (int x = 0; x < aWidth; x++) {
-                char c = displayPositionState(x, y); // get the char to portray field -> overridden by subclasses
-                System.out.print(c + "|");
+        for (int y = -2; y <= aHeight + 2; y++) {
+            boolean isInField = y > -1 && y < aHeight;
+            boolean isLetters = y == -2 || y == aHeight + 1;
+            boolean isLastLine = y == aHeight + 2;
+            if (isInField) {
+                System.out.print(y + "|");
+                for (int x = 0; x < aWidth; x++) {
+                    Position currentPosition = Position.get(x,y);
+                    if (aPlayer.positionIsOccupied(currentPosition)) {
+                        System.out.print(aPlayer.getBoatTypeByPosition(currentPosition));
+                    } else {
+                        System.out.print(" ");
+                    }
+                    System.out.print("|");
+                }
+                System.out.print(y);
+            } else if (isLetters) {
+                System.out.print(" ");
+                for (int x = 0; x < aWidth; x++) {
+                    System.out.print(" " + Position.Letter.getNameByOrdinal(x));
+                }
+            } else if (!isLastLine) {
+                System.out.print(" +");
+                for (int x = 0; x < aWidth; x++) {
+                    System.out.print("-+");
+                }
+            } else {
+                System.out.print("=");
+                for (int x = 0; x <= aWidth; x++) {
+                    System.out.print("==");
+                }
             }
-            System.out.println(y);
+            System.out.println("");
         }
+        drawDivisionLine(aWidth);
     }
 
-    public char displayPositionState(int x, int y) {
-        return ' ';
-        // throw new UnsupportedOperationException("not implemented yet");
-    }
+    abstract void drawDivisionLine(int pWidth);
+
+    abstract void drawName();
+
+    abstract char displayPositionState(int x, int y);
 }

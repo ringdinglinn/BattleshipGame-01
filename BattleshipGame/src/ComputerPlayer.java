@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class ComputerPlayer extends Player {
     public ComputerPlayer() {
-        aGrid = new TargetGrid();
+        aGrid = new TargetGrid(this); // circular reference
     }
 
     /** Returns when there is a miss */
