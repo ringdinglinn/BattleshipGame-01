@@ -1,7 +1,6 @@
-import java.sql.Array;
 import java.util.*;
 
-public class Boat implements Iterable<Position>{
+public class Boat implements Iterable<Position> {
     private final int aLength;
     private final char aLetter;
     private Position aStartPos;
@@ -9,11 +8,11 @@ public class Boat implements Iterable<Position>{
     private boolean isPlaced = false;
 
     /** Returns true if the boat is placed */
-    public boolean getIsPlaced(){
+    public boolean getIsPlaced() {
         return isPlaced;
     }
 
-    public void place(){
+    public void place() {
         isPlaced = true;
     }
 
@@ -23,13 +22,13 @@ public class Boat implements Iterable<Position>{
     }
 
     /** @pre pStartPos != null && pEndPos != null */
-    public void setPositions(Position pStartPos, Position pEndPos){
+    public void setPositions(Position pStartPos, Position pEndPos) {
         assert pStartPos != null && pEndPos != null;
         this.aStartPos = pStartPos;
         this.aEndPos = pEndPos;
     }
 
-    public boolean isHit(Position shot){
+    public boolean isHit(Position shot) {
         return shot.within(aStartPos, aEndPos);
     }
 
@@ -41,7 +40,10 @@ public class Boat implements Iterable<Position>{
         return aLetter;
     }
 
-    public Iterator<Position> iterator(){
+    /**
+     * Returns an Iterator<Position> over all the coordinates a given boat occupies
+     */
+    public Iterator<Position> iterator() {
         List<Position> positions = new ArrayList<Position>();
 
         if (aStartPos.getX() == aEndPos.getX()) {
