@@ -20,9 +20,11 @@ public class ComputerPlayer extends Player {
 
         if (!isHit(shotPos)) {
             // It was a miss
+            aShots.addShot(shotPos, ShotResult.MISS);
             return;
         }
         // It is a hit
+        aShots.addShot(shotPos, ShotResult.HIT);
         setBomb();
 
     }

@@ -37,8 +37,11 @@ public class HumanPlayer extends Player {
 
         if (isHit(shotPos)) {
             TerminalIO.writeLine("You hit something!");
+            aShots.addShot(shotPos, ShotResult.MISS);
             setBomb();
         }
+        aShots.addShot(shotPos, ShotResult.HIT);
+
 
         TerminalIO.writeLine("You missed!");
     }
@@ -71,7 +74,8 @@ public class HumanPlayer extends Player {
 
     /* Returns whether the boat placement is valid */
     private boolean validateBoatInput(Position startPos, Position endPos, Boat boat) {
-        if (startPos == null || endPos == null) return false;
+        if (startPos == null || endPos == null)
+            return false;
 
         boolean isValid = false;
 
@@ -112,7 +116,7 @@ public class HumanPlayer extends Player {
             Position startPos = Position.get(x1, y1);
             Position endPos = Position.get(x2, y2);
 
-            return new Tuple<Position,Position>(startPos, endPos);
+            return new Tuple<Position, Position>(startPos, endPos);
         }
         return new Tuple<Position, Position>(null, null);
     }
