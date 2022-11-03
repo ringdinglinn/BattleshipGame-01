@@ -102,10 +102,10 @@ public class HumanPlayer extends Player {
         // is correct format
         if (validateCoordinateInput(coordinates[0]) && validateCoordinateInput(coordinates[1])) {
             char[] inputs = {
-                    input.charAt(0),
-                    input.charAt(1),
-                    input.charAt(3),
-                    input.charAt(4)
+                input.charAt(0),
+                input.charAt(1),
+                input.charAt(3),
+                input.charAt(4)
             };
 
             int y1 = inputs[1] - 48;
