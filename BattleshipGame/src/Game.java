@@ -24,7 +24,7 @@ public class Game {
         }
 
         public void incrementTurn() {
-            aTurns = +1;
+            aTurns += 1;
         }
 
         public int getTurn() {
