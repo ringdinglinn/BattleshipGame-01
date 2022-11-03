@@ -81,7 +81,6 @@ public class HumanPlayer extends Player {
             if (Position.distance(startPos, endPos) == boat.getLength()) {
                 // doesn't collide with other boats
                 boolean collidesWithBoats = boatCollidesWithBoats(startPos, endPos);
-                System.out.println(collidesWithBoats);
                 isValid = !collidesWithBoats;
             }
         }
@@ -116,17 +115,5 @@ public class HumanPlayer extends Player {
             return new Tuple<Position,Position>(startPos, endPos);
         }
         return new Tuple<Position, Position>(null, null);
-    }
-
-    private boolean boatCollidesWithBoats(Position pStart, Position pEnd){
-        // doesn't collide with boats
-        boolean collidesWithBoats = false;
-        Iterator<Position> itr = Position.getPositionsFromTo(pStart, pEnd);
-
-        while (itr.hasNext()){
-            if (aBoats.positionIsOccupied(itr.next())) collidesWithBoats = true;
-        }
-
-        return collidesWithBoats;
     }
 }

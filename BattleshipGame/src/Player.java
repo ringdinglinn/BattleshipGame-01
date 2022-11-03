@@ -61,4 +61,16 @@ public abstract class Player {
 
     }
 
+    protected boolean boatCollidesWithBoats(Position pStart, Position pEnd){
+        // doesn't collide with boats
+        boolean collidesWithBoats = false;
+        Iterator<Position> itr = Position.getPositionsFromTo(pStart, pEnd);
+
+        while (itr.hasNext()){
+            if (aBoats.positionIsOccupied(itr.next())) collidesWithBoats = true;
+        }
+
+        return collidesWithBoats;
+    }
+
 }
