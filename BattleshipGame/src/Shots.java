@@ -28,6 +28,8 @@ public class Shots implements Iterable<Shot> {
         return new ArrayList<Shot>(aShots);
     }
 
+    // TODO: add method to check if a given boat is sunk
+
     public Iterator<Shot> iterator() {
         return aShots.iterator();
     }
