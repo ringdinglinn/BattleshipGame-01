@@ -36,18 +36,16 @@ public class Game {
     public void play() {
         // TODO: initialize player boards
 
-        // turn = aTurn.getTurn() % players.size();
-        // play game
-        // while (true) {
-        // for (Player player : players) {
-        // code
-        // }
-        // }
-
-        // throw new UnsupportedOperationException("not implemented yet");
-
+        // Allow everyone to place boats
         for (Player player : players) {
             player.setBoats();
+        }
+
+        // play the game :)
+        while (true) {
+            int turn = aTurn.getTurn() % players.size();
+            players.get(turn).setBomb();
+            aTurn.incrementTurn();
         }
     }
 
