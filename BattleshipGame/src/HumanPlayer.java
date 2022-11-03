@@ -15,37 +15,39 @@ public class HumanPlayer extends Player {
 
     /** Asks user to place a bomb */
     public void setBomb() {
-        TerminalIO.writeLine("Please place a bomb: ");
-        String input = TerminalIO.readLine();
+        System.out.println("set bomb start");
+        while (true) {
 
-        // Validate coordinate
-        if (!validateCoordinateInput(input)) {
-            System.out.println("Please try again");
-            setBomb();
+            System.out.println("in while loop");
+            TerminalIO.writeLine("Please place a bomb: ");
+            String input = TerminalIO.readLine();
+
+            // Validate coordinate
+            if (!validateCoordinateInput(input)) {
+                System.out.println("Please try again");
+            } else {
+                // convert coordinate string into Position object
+                String[] inputStrings = input.split("");
+                int x = Position.Letter.getOrdinalOfLetter(inputStrings[0]);
+                int y = Integer.parseInt(inputStrings[1]);
+                Position shotPos = Position.get(x, y);
+
+                if (!isNewShot(shotPos)) {
+                    System.out.println("You already placed a bomb here..");
+                } else {
+                    if (isHit(shotPos)) {
+                        TerminalIO.writeLine("You hit something!");
+                        aShots.addShot(shotPos, ShotResult.HIT);
+                        updateGrid();
+                    } else {
+                        aShots.addShot(shotPos, ShotResult.MISS);
+                        updateGrid();
+                        TerminalIO.writeLine("You missed!");
+                        break;
+                    }
+                }
+            }
         }
-
-        // convert coordinate string into Position object
-        String[] inputStrings = input.split("");
-        int x = Position.Letter.getOrdinalOfLetter(inputStrings[0]);
-        int y = Integer.parseInt(inputStrings[1]);
-        Position shotPos = Position.get(x, y);
-
-        if (!isNewShot(shotPos)) {
-            System.out.println("You already placed a bomb here..");
-            setBomb();
-        }
-
-        if (isHit(shotPos)) {
-            TerminalIO.writeLine("You hit something!");
-            aShots.addShot(shotPos, ShotResult.HIT);
-            updateGrid();
-            setBomb();
-        }
-        
-        aShots.addShot(shotPos, ShotResult.MISS);
-        updateGrid();
-
-        TerminalIO.writeLine("You missed!");
     }
 
     protected void updateGrid(){

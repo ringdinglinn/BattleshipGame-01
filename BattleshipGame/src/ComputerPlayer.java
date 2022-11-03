@@ -10,23 +10,28 @@ public class ComputerPlayer extends Player {
 
     /** Returns when there is a miss */
     public void setBomb() {
-        int x = new Random().nextInt(10);
-        int y = new Random().nextInt(10);
+        System.out.println("set bomb (computer player)");
+        boolean shooting = true;
+        while(shooting){
+            System.out.println("in while loop (computer player)");
+            int x = new Random().nextInt(10);
+            int y = new Random().nextInt(10);
 
-        Position shotPos = Position.get(x, y);
-        if (!isNewShot(shotPos)) {
-            setBomb();
+            Position shotPos = Position.get(x, y);
+
+            if (isNewShot(shotPos)) {
+                if (isHit(shotPos)) {
+                    TerminalIO.writeLine("Opponent hit something!");
+                    aShots.addShot(shotPos, ShotResult.HIT);
+                    updateGrid();
+                } else {
+                    shooting = false;
+                    aShots.addShot(shotPos, ShotResult.MISS);
+                    updateGrid();
+                    TerminalIO.writeLine("Opponent missed!");
+                }
+            }
         }
-
-        if (!isHit(shotPos)) {
-            // It was a miss
-            aShots.addShot(shotPos, ShotResult.MISS);
-            return;
-        }
-        // It is a hit
-        aShots.addShot(shotPos, ShotResult.HIT);
-        setBomb();
-
     }
 
     protected void setBoat(Boat boat) {

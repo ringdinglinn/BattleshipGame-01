@@ -50,9 +50,9 @@ public class Position {
     public boolean within(Position pPos1, Position pPos2) {
         assert pPos1 != null && pPos2 != null;
 
-        if (horizontallyAligned(pPos1, pPos2)){ // vertical
+        if (verticallyAligned(pPos1, pPos2)){ // vertical
             return (pPos1.getY() <= aY && pPos2.getY() >= aY) && aX == pPos1.getX();
-        } else if (verticallyAligned(pPos1, pPos2)){ // horizontal
+        } else if (horizontallyAligned(pPos1, pPos2)){ // horizontal
                 return (pPos1.getX() <= aX && pPos2.getX() >= aX) && aY == pPos1.getY();
         } else {
             return false;
