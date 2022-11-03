@@ -6,12 +6,17 @@ public class ComputerPlayer extends Player {
     public ComputerPlayer() {
         aGrid = new TargetGrid(this); // circular reference
     }
+    private boolean isHidden = true;
+
+    public void hasWon(){
+        System.out.println("Computer has won!!!");
+        isHidden = true;
+    }
 
     /** Returns when there is a miss */
     public void setBomb() {
         System.out.println("set bomb (computer player)");
-        boolean shooting = true;
-        while(shooting){
+        while(true){
             System.out.println("in while loop (computer player)");
             int x = new Random().nextInt(10);
             int y = new Random().nextInt(10);
@@ -19,15 +24,19 @@ public class ComputerPlayer extends Player {
             Position shotPos = Position.get(x, y);
 
             if (isNewShot(shotPos)) {
-                if (getShotResult(shotPos) != ShotResult.MISS) {
-                    TerminalIO.writeLine("Opponent hit something!");
-                    aShots.addShot(shotPos, ShotResult.HIT);
+                ShotResult result = getShotResult(shotPos);
+                if (result != ShotResult.MISS) {
+                    TerminalIO.writeLine("You hit something!");
+                    aShots.addShot(shotPos, result);
+                    if (result == ShotResult.SUNK) {
+                        updateShots();
+                    }
                     updateGrid();
                 } else {
-                    shooting = false;
                     aShots.addShot(shotPos, ShotResult.MISS);
                     updateGrid();
-                    TerminalIO.writeLine("Opponent missed!");
+                    TerminalIO.writeLine("You missed!");
+                    break;
                 }
             }
         }
@@ -79,6 +88,10 @@ public class ComputerPlayer extends Player {
         } else {
             boat.setPositions(startPos, endPos);
         }
+    }
+
+    protected boolean isHidden() {
+        return isHidden;
     }
 
 }

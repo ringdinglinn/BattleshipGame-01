@@ -113,8 +113,18 @@ public abstract class Player {
         return aBoats.getBoatByPosition(pPos);
     }
 
+    public boolean allBoatsDestroyed(){
+        return aBoats.allBoatsDestroyed();
+    }
+
+    abstract void hasWon();
+
     protected void updateGrid(){
         printGrid();
         aOpponent.printGrid();
+    }
+
+    protected boolean isHidden(){
+        return false;
     }
 }

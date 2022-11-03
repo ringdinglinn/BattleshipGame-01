@@ -1,6 +1,19 @@
 public class OceanGrid extends Grid {
-    protected char displayPositionState(int x, int y) {
+    protected char displayShotState(Shot shot) {
+        if (shot.getShotResult() == ShotResult.HIT){ // get shot
+            return 'X';
+        } else if (shot.getShotResult() == ShotResult.MISS){
+            return 'o';
+        }
         return ' ';
+    }
+
+    protected char displayPositionState(Position currentPosition) {
+        if (aPlayer.positionIsOccupied(currentPosition)) { // is a boat on field
+            return aPlayer.getBoatTypeByPosition(currentPosition);
+        } else {
+            return ' ';
+        }
     }
 
     public OceanGrid(Player pPlayer){

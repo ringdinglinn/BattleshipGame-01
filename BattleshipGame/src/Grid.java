@@ -1,9 +1,7 @@
-import javax.sql.ConnectionPoolDataSource;
-
 public abstract class Grid {
     private final int aHeight = 10;
     private final int aWidth = 10;
-    private final Player aPlayer;
+    protected final Player aPlayer;
 
     public Grid(Player pPlayer){
         aPlayer = pPlayer;
@@ -22,21 +20,10 @@ public abstract class Grid {
                 for (int x = 0; x < aWidth; x++) {
                     Position currentPosition = Position.get(x,y);
                     if (aPlayer.getOpponent().isNewShot(currentPosition)){ // is shot on field
-                        if (aPlayer.positionIsOccupied(currentPosition)) { // is a boat on field
-                            System.out.print(aPlayer.getBoatTypeByPosition(currentPosition));
-                        } else {
-                            System.out.print(" ");
-                        }
+                        System.out.print(displayPositionState(currentPosition));
                     } else {
                         Shot shot = aPlayer.getOpponent().aShots.getShotAtPosition(currentPosition);
-                        if (shot.getShotResult() == ShotResult.HIT){ // get shot
-                            System.out.print("X");
-                        } else if (shot.getShotResult() == ShotResult.MISS){
-                            System.out.print("o");
-                        } else if (shot.getShotResult() == ShotResult.SUNK) {
-                            System.out.print("*");
-                            //System.out.print(aPlayer.getBoatTypeByPosition(currentPosition));
-                        }
+                        System.out.print(displayShotState(shot));
                     }
 
                     System.out.print("|");
@@ -67,5 +54,6 @@ public abstract class Grid {
 
     abstract void drawName();
 
-    abstract char displayPositionState(int x, int y);
+    abstract char displayShotState(Shot shot);
+    abstract char displayPositionState(Position currentPosition);
 }

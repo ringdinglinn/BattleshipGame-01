@@ -1,6 +1,25 @@
 public class TargetGrid extends Grid {
-    protected char displayPositionState(int x, int y) {
+    protected char displayShotState(Shot shot) {
+        if (shot.getShotResult() == ShotResult.HIT){ // get shot
+            return 'X';
+        } else if (shot.getShotResult() == ShotResult.MISS){
+            return 'o';
+        } else if (shot.getShotResult() == ShotResult.SUNK) {
+            return aPlayer.getBoatTypeByPosition(shot.getPosition());
+        }
         return ' ';
+    }
+
+    protected char displayPositionState(Position currentPosition) {
+        if (aPlayer.isHidden()) {
+            return ' ';
+        } else {
+            if (aPlayer.positionIsOccupied(currentPosition)) { // is a boat on field
+                return aPlayer.getBoatTypeByPosition(currentPosition);
+            } else {
+                return ' ';
+            }
+        }
     }
 
     public TargetGrid(Player pPlayer){

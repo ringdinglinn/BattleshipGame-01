@@ -11,6 +11,10 @@ public class HumanPlayer extends Player {
         throw new UnsupportedOperationException("not implemented yet");
     }
 
+    public void hasWon(){
+        System.out.println("Human has won!!!");
+    }
+
     /** Asks user to place a bomb */
     public void setBomb() {
         System.out.println("set bomb start");

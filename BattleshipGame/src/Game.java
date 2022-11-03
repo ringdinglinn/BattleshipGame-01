@@ -44,7 +44,15 @@ public class Game {
         while (true) {
             int turn = aTurn.getTurn() % players.size();
             players.get(turn).setBomb();
+            evaluateGameState();
             aTurn.incrementTurn();
+        }
+    }
+
+    private void evaluateGameState(){
+        for (Player player : players) {
+            player.allBoatsDestroyed();
+            player.getOpponent().hasWon();
         }
     }
 
