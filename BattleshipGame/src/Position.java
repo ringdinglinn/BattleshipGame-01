@@ -46,16 +46,54 @@ public class Position {
     }
 
     /** @pre pPos1 != null && pPos2 != null;
-     *  @pre pPos1.getX() < pPos2.getY() || pPos2.getY() < pPos.getY() */
+     *  @pre pPos1.getX() < pPos2.getY() || pPos2.getY() < pPos.getY(); */
     public boolean within(Position pPos1, Position pPos2) {
         assert pPos1 != null && pPos2 != null;
 
-        if (pPos1.getX() == pPos2.getX()){ // vertical
+        if (horizontallyAligned(pPos1, pPos2)){ // vertical
             return (pPos1.getY() <= aY && pPos2.getY() >= aY) && aX == pPos1.getX();
-        } else if (pPos1.getX() == pPos2.getX()){ // horizontal
+        } else if (verticallyAligned(pPos1, pPos2)){ // horizontal
                 return (pPos1.getX() <= aX && pPos2.getX() >= aX) && aY == pPos1.getY();
         } else {
             return false;
+        }
+    }
+
+    /** @pre pStart.getX() == pEnd.getX() || pStart.getY() == pEnd.getY();
+     * @pre pStart != null && pEnd != null */
+    public static Iterator<Position> getPositionsFromTo(Position pStart, Position pEnd){
+        List<Position> positions = new ArrayList<Position>();
+
+        if (horizontallyAligned(pStart, pEnd)) {
+            for (int x = pStart.getX(); x <= pEnd.getX(); x++) {
+                positions.add(Position.get(x, pStart.getY()));
+            }
+        } else {
+            for (int y = pStart.getY(); y <= pEnd.getY(); y++) {
+                positions.add(Position.get(pStart.getX(), y));
+            }
+        }
+
+        return positions.iterator();
+    }
+
+    /** @pre pStart != null && pEnd != null; */
+    public static boolean horizontallyAligned(Position pStart, Position pEnd) {
+        return pStart.getY() == pEnd.getY();
+    }
+
+    /** @pre pStart != null && pEnd != null; */
+    public static boolean verticallyAligned(Position pStart, Position pEnd) {
+        return pStart.getX() == pEnd.getX();
+    }
+
+    /** @pre pStart.getX() == pEnd.getX() || pStart.getY() == pEnd.getY();
+     * @pre pStart != null && pEnd != null */
+    public static int distance(Position pStart, Position pEnd) {
+        if (horizontallyAligned(pStart, pEnd)) {
+            return pEnd.getX() - pStart.getX() + 1;
+        } else  {
+            return pEnd.getY() - pStart.getY() + 1;
         }
     }
 

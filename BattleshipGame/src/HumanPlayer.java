@@ -1,4 +1,6 @@
 
+import javax.sql.ConnectionPoolDataSource;
+import java.util.Iterator;
 import java.util.regex.*;
 
 public class HumanPlayer extends Player {
@@ -46,14 +48,16 @@ public class HumanPlayer extends Player {
                 + boat.getLength() + " fields");
         String input = TerminalIO.readLine();
 
-        if (!validateBoatInput(input, boat)) {
+        Position startPos = parseInput(input).first;
+        Position endPos = parseInput(input).second;
+
+        if (!validateBoatInput(startPos, endPos, boat)) {
             System.out.println("Please try again");
             setBoat(boat);
+        } else {
+            boat.setPositions(startPos, endPos);
+            System.out.println("Nice! Boat placed");
         }
-
-        // TODO: place boat
-
-        System.out.println("Nice! Boat placed");
     }
 
     /* Returns whether a coordinate matches the regex pattern [A-J][0-9] */
@@ -66,12 +70,29 @@ public class HumanPlayer extends Player {
     }
 
     /* Returns whether the boat placement is valid */
-    private boolean validateBoatInput(String input, Boat boat) {
+    private boolean validateBoatInput(Position startPos, Position endPos, Boat boat) {
+        if (startPos == null || endPos == null) return false;
+
         boolean isValid = false;
 
+        // is vertical or horizontal
+        if (Position.verticallyAligned(startPos, endPos) || Position.horizontallyAligned(startPos, endPos)) {
+            // is correct length
+            if (Position.distance(startPos, endPos) == boat.getLength()) {
+                // doesn't collide with other boats
+                boolean collidesWithBoats = boatCollidesWithBoats(startPos, endPos);
+                System.out.println(collidesWithBoats);
+                isValid = !collidesWithBoats;
+            }
+        }
+
+        return isValid;
+    }
+
+    private Tuple<Position, Position> parseInput(String input) {
         String[] coordinates = input.split(",");
         if (coordinates.length > 2) {
-            return false;
+            return new Tuple<Position, Position>(null, null);
         }
 
         // is correct format
@@ -89,36 +110,21 @@ public class HumanPlayer extends Player {
             int x1 = Position.Letter.getOrdinalOfLetter(String.valueOf(inputs[0]));
             int x2 = Position.Letter.getOrdinalOfLetter(String.valueOf(inputs[2]));
 
-            // is horizontal or vertical
-            if (x1 == x2 || y1 == y2) {
-                System.out.println(x1 + ", " + y1 + ", " + x2 + ", " + y2);
+            Position startPos = Position.get(x1, y1);
+            Position endPos = Position.get(x2, y2);
 
-                // is of correct length
-                if ((x1 == x2 && y2 - y1 + 1 == boat.getLength()) || (y1 == y2 && x2 - x1 + 1 == boat.getLength())) {
-                    System.out.println("correct Length");
-                    boat.setPositions(Position.get(x1, y1), Position.get(x2, y2));
-
-                    boolean collidesWithBoats = boatCollidesWithBoats(boat);
-                    System.out.println(collidesWithBoats);
-                    if (!collidesWithBoats) {
-                        isValid = true;
-                        boat.place();
-                    }
-                }
-            }
+            return new Tuple<Position,Position>(startPos, endPos);
         }
-        return isValid;
+        return new Tuple<Position, Position>(null, null);
     }
 
-    public boolean boatCollidesWithBoats(Boat boat){
+    private boolean boatCollidesWithBoats(Position pStart, Position pEnd){
         // doesn't collide with boats
         boolean collidesWithBoats = false;
-        for (Position position : boat) {
-            if (aBoats.positionIsOccupied(position)) collidesWithBoats = true;
-        }
+        Iterator<Position> itr = Position.getPositionsFromTo(pStart, pEnd);
 
-        if (collidesWithBoats){
-            boat.setPositions(null, null);
+        while (itr.hasNext()){
+            if (aBoats.positionIsOccupied(itr.next())) collidesWithBoats = true;
         }
 
         return collidesWithBoats;

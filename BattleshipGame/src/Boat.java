@@ -6,15 +6,10 @@ public class Boat implements Iterable<Position>{
     private final char aLetter;
     private Position aStartPos;
     private Position aEndPos;
-    private boolean isPlaced = false;
 
     /** Returns true if the boat is placed */
-    public boolean getIsPlaced(){
-        return isPlaced;
-    }
-
-    public void place(){
-        isPlaced = true;
+    public boolean isPlaced(){
+        return aStartPos != null && aEndPos != null;
     }
 
     public Boat(int pLength, char pLetter) {
@@ -41,22 +36,10 @@ public class Boat implements Iterable<Position>{
         return aLetter;
     }
 
+    /** @pre this.isPlaced == true; */
     public Iterator<Position> iterator(){
-        List<Position> positions = new ArrayList<Position>();
-
-        if (aStartPos.getX() == aEndPos.getX()) {
-            for (int x = aStartPos.getX(); x <= aEndPos.getX(); x++) {
-                positions.add(Position.get(x, aStartPos.getY()));
-            }
-        } else {
-            for (int x = aStartPos.getX(); x <= aEndPos.getX(); x++) {
-                positions.add(Position.get(x, aStartPos.getY()));
-            }
-        }
-
-        return positions.iterator();
+        return Position.getPositionsFromTo(aStartPos, aEndPos);
     }
-
     // public Boat get(int pLength, char pLetter) {
     // return new Boat(pLength, pLetter);
     // }
