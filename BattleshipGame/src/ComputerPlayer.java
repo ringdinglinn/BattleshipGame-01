@@ -28,7 +28,7 @@ public class ComputerPlayer extends Player {
     }
 
     protected void setBoat(Boat boat) {
-        int coinflip = new Random().nextInt(1);
+        int coinflip = new Random().nextInt(2);
 
         if (coinflip == 0) {
             // generates all possible starting positions for vertical placement
@@ -62,16 +62,18 @@ public class ComputerPlayer extends Player {
         Position startPos = pPossibleStartPos.get(randomStartIndex);
         Position endPos;
         if (isVertical) {
-            endPos = Position.get(startPos.getX(), startPos.getY() - boat.getLength());
+            endPos = Position.get(startPos.getX(), startPos.getY() + boat.getLength() - 1);
         } else {
-            endPos = Position.get(startPos.getX() - boat.getLength(), startPos.getY());
+            endPos = Position.get(startPos.getX() + boat.getLength() - 1, startPos.getY());
         }
 
         // places boat until no collision occurs
         if (boatCollidesWithBoats(startPos, endPos)) {
             setAtRandomPosition(isVertical, boat, pPossibleStartPos);
+        } else {
+            boat.setPositions(startPos, endPos);
+            System.out.println("*");
         }
-        boat.setPositions(startPos, endPos);
     }
 
 }
