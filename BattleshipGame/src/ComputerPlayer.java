@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class ComputerPlayer extends Player {
@@ -20,7 +19,7 @@ public class ComputerPlayer extends Player {
             Position shotPos = Position.get(x, y);
 
             if (isNewShot(shotPos)) {
-                if (isHit(shotPos)) {
+                if (getShotResult(shotPos) != ShotResult.MISS) {
                     TerminalIO.writeLine("Opponent hit something!");
                     aShots.addShot(shotPos, ShotResult.HIT);
                     updateGrid();

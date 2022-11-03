@@ -54,15 +54,34 @@ public abstract class Player {
         return true;
     }
 
-    public boolean isHit(Position pShotPos) {
+    public ShotResult getShotResult(Position pShotPos) {
         // Check if shot hit a boat
         for (Boat boat : aOpponent.aBoats) {
-            if (boat.isHit(pShotPos)) {
-                return true;
+            if (boat.isHit(pShotPos) == ShotResult.HIT) {
+                return boat.evaluateIsSunk();
             }
         }
-        return false;
+        return ShotResult.MISS;
+    }
 
+    protected void updateShots() {
+        for (Shot shot : aShots) {
+            if (shot.getShotResult() == ShotResult.HIT) {
+                if (aOpponent.getBoatAtPosition(shot.getPosition()).getIsSunk()) shot.setShotResult(ShotResult.SUNK);
+            }
+        }
+    }
+
+    protected boolean getBoatIsSunk(Boat boat, Position pShotPos) {
+        for (Position currentPos : boat) {
+            for (Shot shot : aShots) {
+                if (!currentPos.equals(shot.getPosition())){
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -88,6 +107,10 @@ public abstract class Player {
 
     public char getBoatTypeByPosition(Position pPos) {
         return aBoats.getBoatTypeByPosition(pPos);
+    }
+
+    public Boat getBoatAtPosition(Position pPos) {
+        return aBoats.getBoatByPosition(pPos);
     }
 
     protected void updateGrid(){

@@ -5,6 +5,8 @@ public class Boat implements Iterable<Position> {
     private final char aLetter;
     private Position aStartPos;
     private Position aEndPos;
+    private int hitsCounter = 0;
+    private boolean isSunk = false;
 
     /** Returns true if the boat is placed */
     public boolean isPlaced(){
@@ -23,8 +25,24 @@ public class Boat implements Iterable<Position> {
         this.aEndPos = pEndPos;
     }
 
-    public boolean isHit(Position shot) {
-        return shot.within(aStartPos, aEndPos);
+    public ShotResult isHit(Position shot) {
+        return shot.within(aStartPos, aEndPos) ? ShotResult.HIT : ShotResult.MISS;
+    }
+
+    public ShotResult evaluateIsSunk() {
+        hitsCounter += 1;
+        System.out.println("hit counter: " + hitsCounter);
+        if (hitsCounter == aLength){
+            System.out.println("same or larger than: " + aLength);
+            isSunk = true;
+            return ShotResult.SUNK;
+        } else {
+            return ShotResult.HIT;
+        }
+    }
+
+    public boolean getIsSunk(){
+        return isSunk;
     }
 
     public int getLength() {

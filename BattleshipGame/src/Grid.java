@@ -33,6 +33,9 @@ public abstract class Grid {
                             System.out.print("X");
                         } else if (shot.getShotResult() == ShotResult.MISS){
                             System.out.print("o");
+                        } else if (shot.getShotResult() == ShotResult.SUNK) {
+                            System.out.print("*");
+                            //System.out.print(aPlayer.getBoatTypeByPosition(currentPosition));
                         }
                     }
 

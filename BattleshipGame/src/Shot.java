@@ -15,4 +15,8 @@ public class Shot {
         return aShotResult;
     }
 
+    public void setShotResult(ShotResult pResult) {
+        aShotResult = pResult;
+    }
+
 }

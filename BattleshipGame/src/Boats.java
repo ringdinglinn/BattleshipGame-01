@@ -54,4 +54,15 @@ public class Boats implements Iterable<Boat> {
 
         return letter;
     }
+
+    public Boat getBoatByPosition(Position pPos) {
+        for (Boat boat : aBoats) {
+            if (boat.isPlaced()){
+                for (Position position : boat) {
+                    if (pPos.equals(position)) return boat;
+                }
+            }
+        }
+        return null;
+    }
 }

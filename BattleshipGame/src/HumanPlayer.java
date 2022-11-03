@@ -1,6 +1,4 @@
 
-import javax.sql.ConnectionPoolDataSource;
-import java.util.Iterator;
 import java.util.regex.*;
 
 public class HumanPlayer extends Player {
@@ -35,9 +33,13 @@ public class HumanPlayer extends Player {
                 if (!isNewShot(shotPos)) {
                     System.out.println("You already placed a bomb here..");
                 } else {
-                    if (isHit(shotPos)) {
+                    ShotResult result = getShotResult(shotPos);
+                    if (result != ShotResult.MISS) {
                         TerminalIO.writeLine("You hit something!");
-                        aShots.addShot(shotPos, ShotResult.HIT);
+                        aShots.addShot(shotPos, result);
+                        if (result == ShotResult.SUNK) {
+                            updateShots();
+                        }
                         updateGrid();
                     } else {
                         aShots.addShot(shotPos, ShotResult.MISS);
