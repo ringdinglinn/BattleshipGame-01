@@ -44,17 +44,21 @@ public class Game {
         while (true) {
             int turn = aTurn.getTurn() % players.size();
             players.get(turn).setBomb();
-            evaluateGameState();
+            if (evaluateGameState()) {
+                break;
+            }
             aTurn.incrementTurn();
         }
     }
 
-    private void evaluateGameState(){
+    private boolean evaluateGameState(){
         for (Player player : players) {
             if (player.allBoatsDestroyed()) {
                 player.getOpponent().hasWon();
+                return true;
             }
         }
+        return false;
     }
 
     private void updateGrids(){
