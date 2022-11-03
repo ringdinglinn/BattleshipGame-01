@@ -34,8 +34,6 @@ public class Game {
     }
 
     public void play() {
-        // TODO: initialize player boards
-
         // Allow everyone to place boats
         for (Player player : players) {
             player.setBoats();
