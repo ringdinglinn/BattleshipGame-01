@@ -72,7 +72,6 @@ public class ComputerPlayer extends Player {
             setAtRandomPosition(isVertical, boat, pPossibleStartPos);
         } else {
             boat.setPositions(startPos, endPos);
-            System.out.println("*");
         }
     }
 
