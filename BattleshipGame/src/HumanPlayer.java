@@ -22,7 +22,7 @@ public class HumanPlayer extends Player {
             String input = TerminalIO.readLine();
 
             // Validate coordinate
-            if (!validateCoordinateInput(input)) {
+            if (!validateCoordinateInputString(input)) {
                 System.out.println("Please try again");
             } else {
                 // convert coordinate string into Position object
@@ -76,12 +76,18 @@ public class HumanPlayer extends Player {
     }
 
     /* Returns whether a coordinate matches the regex pattern [A-J][0-9] */
-    private boolean validateCoordinateInput(String pCoordinate) {
+    private boolean validateCoordinateInputString(String pCoordinate) {
         String pattern = "[A-J][0-9]";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(pCoordinate);
         return m.find();
+    }
 
+    private boolean validateBoatInputString(String pInput) {
+        String pattern = "[A-J][0-9],[A-J][0-9]";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(pInput);
+        return m.find();
     }
 
     /* Returns whether the boat placement is valid */
@@ -111,7 +117,7 @@ public class HumanPlayer extends Player {
         }
 
         // is correct format
-        if (validateCoordinateInput(coordinates[0]) && validateCoordinateInput(coordinates[1])) {
+        if (validateBoatInputString(input)) {
             char[] inputs = {
                 input.charAt(0),
                 input.charAt(1),
