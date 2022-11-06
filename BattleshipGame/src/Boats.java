@@ -41,6 +41,7 @@ public class Boats implements Iterable<Boat> {
     }
 
     /** @pre positionIsOccupied(pPos) == true */
+    /** @pre pPos != null */
     public char getBoatTypeByPosition(Position pPos) {
         char letter = ' ';
 
@@ -55,6 +56,8 @@ public class Boats implements Iterable<Boat> {
         return letter;
     }
 
+    /** @pre positionIsOccupied(pPos) == true */
+    /** @pre pPos != null */
     public Boat getBoatByPosition(Position pPos) {
         for (Boat boat : aBoats) {
             if (boat.isPlaced()){

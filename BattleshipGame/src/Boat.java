@@ -25,10 +25,13 @@ public class Boat implements Iterable<Position> {
         this.aEndPos = pEndPos;
     }
 
+    /** @pre shot != null */
+    /** @pre this.isPlaced == true; */
     public ShotResult isHit(Position shot) {
         return shot.within(aStartPos, aEndPos) ? ShotResult.HIT : ShotResult.MISS;
     }
 
+    /** @pre this.isPlaced == true; */
     public ShotResult evaluateIsSunk() {
         hitsCounter += 1;
         System.out.println("hit counter: " + hitsCounter);
@@ -41,6 +44,7 @@ public class Boat implements Iterable<Position> {
         }
     }
 
+    /** @pre this.isPlaced == true; */
     public boolean getIsSunk(){
         return isSunk;
     }

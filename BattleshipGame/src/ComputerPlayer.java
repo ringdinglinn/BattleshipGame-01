@@ -40,6 +40,7 @@ public class ComputerPlayer extends Player {
         }
     }
 
+    /** @pre boat != null */
     protected void setBoat(Boat boat) {
         int coinflip = new Random().nextInt(2);
 
@@ -65,7 +66,8 @@ public class ComputerPlayer extends Player {
         }
     }
 
-    /** Is bound to set a boat at a correct position */
+    /** Is bound to set a boat at a correct position
+     * @pre boat != null && pPossibleStartPos != null */
     private void setAtRandomPosition(Boolean isVertical, Boat boat, List<Position> pPossibleStartPos) {
         int n = pPossibleStartPos.size();
 

@@ -25,6 +25,11 @@ public class Position {
         aY = pY;
     }
 
+    /**
+     *
+     * @pre x >= 0 && x <= 9
+     * @pre y >= 0 && y <= 9
+     */
     public static Position get(int pX, int pY){
         return aPositions[pX][pY];
     }
@@ -37,6 +42,7 @@ public class Position {
         return aY;
     }
 
+    /** @pre pPos != null */
     public boolean equals(Position pPos) {
         return aX == pPos.getX() && aY == pPos.getY();
     }
@@ -100,6 +106,10 @@ public class Position {
     public enum Letter {
         A, B, C, D, E, F, G, H, I, J;
 
+        /**
+         *
+         * @pre contains(input)
+         */
         public static int getOrdinalOfLetter(String input){
             int index = -1;
             for (Position.Letter letter : Position.Letter.values()) {
@@ -110,6 +120,23 @@ public class Position {
             return index;
         }
 
+        /** @pre test != null */
+        public static boolean contains(String test) {
+
+            for (Letter c : Letter.values()) {
+                if (c.name().equals(test)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         *
+         * @pre x >= 0 && x <= 9
+         * @pre y >= 0 && y <= 9
+         */
         public static String getNameByOrdinal(int i){
             String name = "";
             for (Position.Letter letter : Position.Letter.values()) {

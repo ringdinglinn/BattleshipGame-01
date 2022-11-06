@@ -3,9 +3,7 @@ import java.util.*;
 public class Shots implements Iterable<Shot> {
     private List<Shot> aShots = new ArrayList<>();
 
-    /**
-     * @pre pPosition != null
-     */
+    /** @pre pPos != null */
     public boolean contains(Position pPosition) {
         for (int i = 0; i < aShots.size(); i++) {
             if (aShots.get(i).getPosition() == pPosition) {
@@ -16,8 +14,8 @@ public class Shots implements Iterable<Shot> {
     }
 
     /**
-     * @pre pPosition != null && pShotResult != null
-     * @pre aShots.contain(pPosition) == false
+     * @pre pPos != null 6& pShotResult != null
+     * @pre contains(pPosition) == false
      */
     public void addShot(Position pPosition, ShotResult pShotResult) {
         aShots.add(new Shot(pPosition, pShotResult));
@@ -34,6 +32,8 @@ public class Shots implements Iterable<Shot> {
         return aShots.iterator();
     }
 
+    /** @pre contains(pPos)
+     *  @pre pPos != null */
     public Shot getShotAtPosition(Position pPos){
         for (Shot shot: aShots){
             if (shot.getPosition().equals(pPos)) return shot;

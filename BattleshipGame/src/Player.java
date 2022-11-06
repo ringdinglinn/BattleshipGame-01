@@ -36,6 +36,7 @@ public abstract class Player {
         }
     }
 
+    /** @pre boat != null */
     protected void setBoat(Boat boat) {
 
     }
@@ -44,6 +45,7 @@ public abstract class Player {
 
     }
 
+    /** @pre pPos != null */
     public boolean isNewShot(Position pShotPos) {
         // Make sure shot is unique
         for (Shot shot : aShots) {
@@ -54,10 +56,13 @@ public abstract class Player {
         return true;
     }
 
+    /** @pre pPos != null */
     public ShotResult getShotResult(Position pShotPos) {
         // Check if shot hit a boat
         for (Boat boat : aOpponent.aBoats) {
             if (boat.isHit(pShotPos) == ShotResult.HIT) {
+                // checks if boat is sunk
+                // makes boat evaluate if sunk
                 return boat.evaluateIsSunk();
             }
         }
@@ -70,18 +75,6 @@ public abstract class Player {
                 if (aOpponent.getBoatAtPosition(shot.getPosition()).getIsSunk()) shot.setShotResult(ShotResult.SUNK);
             }
         }
-    }
-
-    protected boolean getBoatIsSunk(Boat boat, Position pShotPos) {
-        for (Position currentPos : boat) {
-            for (Shot shot : aShots) {
-                if (!currentPos.equals(shot.getPosition())){
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     /**

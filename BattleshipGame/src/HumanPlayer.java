@@ -6,11 +6,6 @@ public class HumanPlayer extends Player {
         aGrid = new OceanGrid(this); // circular reference!
     }
 
-    /** Returns whether all boats have been set */
-    public boolean isAllSet() {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
-
     public void hasWon(){
         System.out.println("Human has won!!!");
     }
@@ -58,6 +53,7 @@ public class HumanPlayer extends Player {
         printGrid();
     }
 
+    /** @pre boat != null */
     protected void setBoat(Boat boat) {
         TerminalIO.writeLine("Please enter coordinates of start and end of " + boat.getLetter() + ", "
                 + boat.getLength() + " fields");
@@ -76,6 +72,7 @@ public class HumanPlayer extends Player {
     }
 
     /* Returns whether a coordinate matches the regex pattern [A-J][0-9] */
+    /** @pre pCoordinate != null */
     private boolean validateCoordinateInputString(String pCoordinate) {
         String pattern = "[A-J][0-9]";
         Pattern r = Pattern.compile(pattern);
@@ -83,6 +80,7 @@ public class HumanPlayer extends Player {
         return m.find();
     }
 
+    /** @pre pInput != null */
     private boolean validateBoatInputString(String pInput) {
         String pattern = "[A-J][0-9],[A-J][0-9]";
         Pattern r = Pattern.compile(pattern);
@@ -91,6 +89,9 @@ public class HumanPlayer extends Player {
     }
 
     /* Returns whether the boat placement is valid */
+    /** @pre boat != null */
+    /** @pre startPos != null */
+    /** @pre endPos != null */
     private boolean validateBoatInput(Position startPos, Position endPos, Boat boat) {
         if (startPos == null || endPos == null)
             return false;
@@ -110,6 +111,8 @@ public class HumanPlayer extends Player {
         return isValid;
     }
 
+    /** @pre input != null */
+    /** @pre validateBoatInputString(input) == true */
     private Tuple<Position, Position> parseInput(String input) {
         String[] coordinates = input.split(",");
         if (coordinates.length > 2) {

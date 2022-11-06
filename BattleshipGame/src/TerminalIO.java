@@ -12,8 +12,9 @@ public class TerminalIO {
     }
 
     /** Writes to console */
-    public static String writeLine(String aMessage) {
-        System.out.println(aMessage);
-        return aMessage;
+    /** @pre message != null  */
+    public static String writeLine(String message) {
+        System.out.println(message);
+        return message;
     }
 }

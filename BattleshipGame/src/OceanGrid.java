@@ -1,16 +1,18 @@
 public class OceanGrid extends Grid {
-    protected char displayShotState(Shot shot) {
-        if (shot.getShotResult() == ShotResult.HIT){ // get shot
+    /** @pre pShot != null */
+    protected char displayShotState(Shot pShot) {
+        if (pShot.getShotResult() == ShotResult.HIT){
             return 'X';
-        } else if (shot.getShotResult() == ShotResult.MISS){
+        } else if (pShot.getShotResult() == ShotResult.MISS){
             return 'o';
         }
         return ' ';
     }
 
-    protected char displayPositionState(Position currentPosition) {
-        if (aPlayer.positionIsOccupied(currentPosition)) { // is a boat on field
-            return aPlayer.getBoatTypeByPosition(currentPosition);
+    /** @pre pPos != null */
+    protected char displayPositionState(Position pPos) {
+        if (aPlayer.positionIsOccupied(pPos)) { // is a boat on field
+            return aPlayer.getBoatTypeByPosition(pPos);
         } else {
             return ' ';
         }

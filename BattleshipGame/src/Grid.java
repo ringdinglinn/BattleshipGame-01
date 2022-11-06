@@ -54,6 +54,7 @@ public abstract class Grid {
 
     abstract void drawName();
 
+    /** @pre shot != null */
     abstract char displayShotState(Shot shot);
     abstract char displayPositionState(Position currentPosition);
 }
