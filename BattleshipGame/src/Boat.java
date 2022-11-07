@@ -34,9 +34,7 @@ public class Boat implements Iterable<Position> {
     /** @pre this.isPlaced == true; */
     public ShotResult evaluateIsSunk() {
         hitsCounter += 1;
-        System.out.println("hit counter: " + hitsCounter);
         if (hitsCounter == aLength){
-            System.out.println("same or larger than: " + aLength);
             isSunk = true;
             return ShotResult.SUNK;
         } else {
